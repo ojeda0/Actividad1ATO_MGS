@@ -9,9 +9,20 @@ public class FactorialApp {
 	}
 
 	public static int factorial(int n) {
-		int fact = 0;
-		for (int i = 1; i <= n; i--) {
-			fact = fact * i;
+		int fact = 1;
+		
+		if(n<0) {
+			System.out.println("Error, el número no puede ser menor que 0.");
+		}
+		
+		else if(n==0) {
+			fact = 1;
+		}
+		
+		else {
+			for (int i = 1; i <= n; i++) {
+				fact = fact * i;
+			}
 		}
 		
 		return fact;
