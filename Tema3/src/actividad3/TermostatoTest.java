@@ -2,15 +2,14 @@ package actividad3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TermostatoTest {
 
 	private static Termostato termostato;
 	
-	@BeforeAll
+	@BeforeEach
 	public static void Termostato() {
 		
 		termostato = new Termostato(10, 30, 20);
@@ -35,35 +34,90 @@ class TermostatoTest {
 
 	@Test
 	void testGetTemperaturaMin() {
-		fail("Not yet implemented");
+
+		double temperaturaMin = termostato.getTemperaturaMin();
+		assertEquals(10, temperaturaMin);
+		
 	}
 
 	@Test
 	void testGetTemperaturaMax() {
-		fail("Not yet implemented");
+		
+		double temperaturaMax = termostato.getTemperaturaMax();
+		assertEquals(30, temperaturaMax);
+		
 	}
 
 	@Test
 	void testSetEncendido() {
-		fail("Not yet implemented");
+		
+		termostato.setEncendido(true);
+		assertEquals(true, termostato.isEncendido());
+		
 	}
 
 	@Test
-	void testSetTemperaturaMin() {
+	void testSetTemperaturaMinEntra() {
 		
 		termostato.setTemperaturaMin(18);
 		assertEquals(18, termostato.getTemperaturaMin());
+		assertEquals(20, termostato.getTemperaturaActual());
+		
+	}
+	
+	@Test
+	void testSetTemperaturaMinNoEntra() {
+		
+		termostato.setTemperaturaMin(21);
+		assertEquals(21, termostato.getTemperaturaMin());
+		assertEquals(20, termostato.getTemperaturaActual());
 		
 	}
 
 	@Test
-	void testSetTemperaturaMax() {
-		fail("Not yet implemented");
+	void testSetTemperaturaMaxEntra() {
+		
+		termostato.setTemperaturaMax(25);
+		assertEquals(25, termostato.getTemperaturaMax());
+		assertEquals(20, termostato.getTemperaturaActual());
+		
+	}
+	
+	@Test
+	void testSetTemperaturaMaxNoEntra() {
+		
+		termostato.setTemperaturaMax(19);
+		assertEquals(19, termostato.getTemperaturaMax());
+		assertEquals(19, termostato.getTemperaturaActual());
+		
+	}
+	
+	@Test
+	void testSetTemperaturaActualEntra() {
+		
+		try {
+			
+			termostato.setTemperaturaActual(31);
+			assertEquals(31, termostato.getTemperaturaActual());
+			
+			fail();
+			
+		}
+		catch(ArithmeticException ae) {
+			
+			
+			
+		}
+
+		
 	}
 
 	@Test
-	void testSetTemperaturaActual() {
-		fail("Not yet implemented");
+	void testSetTemperaturaActualNoEntra() {
+		
+		termostato.setTemperaturaActual(22);
+		assertEquals(22, termostato.getTemperaturaActual());
+		
 	}
 
 	@Test
