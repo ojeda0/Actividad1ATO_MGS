@@ -10,7 +10,7 @@ class TermostatoTest {
 	private static Termostato termostato;
 	
 	@BeforeEach
-	public static void Termostato() {
+	public void Termostato() {
 		
 		termostato = new Termostato(10, 30, 20);
 		
@@ -100,15 +100,14 @@ class TermostatoTest {
 			termostato.setTemperaturaActual(31);
 			assertEquals(31, termostato.getTemperaturaActual());
 			
-			fail();
+			fail("ERROR. Se debería haber lanzado una excepción.");
 			
 		}
-		catch(ArithmeticException ae) {
+		catch(IllegalArgumentException iae) {
 			
-			
+			// Prueba correcta
 			
 		}
-
 		
 	}
 
@@ -122,17 +121,81 @@ class TermostatoTest {
 
 	@Test
 	void testEncender() {
-		fail("Not yet implemented");
+		
+		termostato.encender();
+		assertEquals(true, termostato.isEncendido());
+		
 	}
 
 	@Test
 	void testApagar() {
-		fail("Not yet implemented");
+		
+		termostato.apagar();
+		assertEquals(false, termostato.isEncendido());
+		
 	}
 
 	@Test
-	void testSubir() {
-		fail("Not yet implemented");
+	void testSubirNoEncendido() {
+		
+		try {
+			
+			termostato.subir(5);
+			assertEquals(25, termostato.getTemperaturaActual());
+			fail("ERROR. Se debería haber lanzado una excepción.");
+			
+		}
+		catch(IllegalStateException ise) {
+			
+			// Prueba correcta
+			
+		}
+		
+	}
+		
+	@Test
+	void testSubirGradosNegativos() {
+		
+		try {
+			
+			termostato.subir(0);
+			assertEquals(20, termostato.getTemperaturaActual());
+			fail("ERROR. Se debería haber lanzado una excepción.");
+			
+		}
+		catch(IllegalArgumentException iae) {
+			
+			// Prueba correcta
+			
+		}
+		
+	}
+	
+	@Test
+	void testSubirTemperaturaMayorMax() {
+		
+		try {
+			
+			termostato.subir(12);
+			assertEquals(32, termostato.getTemperaturaActual());
+			fail("ERROR. Se debería haber lanzado una excepción.");
+			
+		}
+		catch(IllegalStateException ise) {
+			
+			// Prueba correcta
+			
+		}
+		
+	}
+	
+	@Test
+	void testSubirCorrecto() {
+		
+		termostato.encender();
+		termostato.subir(5);
+		assertEquals(25, termostato.getTemperaturaActual());
+		
 	}
 
 	@Test
