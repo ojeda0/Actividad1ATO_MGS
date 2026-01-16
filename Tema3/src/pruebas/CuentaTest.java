@@ -3,14 +3,14 @@ package pruebas;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CuentaTest {
 	
 	private static Cuenta cuenta;
 	
-	@BeforeAll
+	@BeforeEach
 	public static void nuevaCuenta() {
 		
 		cuenta = new Cuenta("ES6475893745", 100);
