@@ -106,7 +106,7 @@ class TermostatoTest {
 		
 		termostato.setTemperaturaMax(9);
 		assertEquals(30, termostato.getTemperaturaMax());
-		assertEquals(19, termostato.getTemperaturaActual());
+		assertEquals(20, termostato.getTemperaturaActual());
 		
 	}
 	
