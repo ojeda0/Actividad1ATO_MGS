@@ -66,6 +66,15 @@ class TermostatoTest {
 	}
 	
 	@Test
+	void testSetTemperaturaMinNoEntra2() {
+		
+		termostato.setTemperaturaMin(31);
+		assertEquals(10, termostato.getTemperaturaMin());
+		assertEquals(20, termostato.getTemperaturaActual());
+		
+	}
+	
+	@Test
 	void testSetTemperaturaMinNoEntra() {
 		
 		termostato.setTemperaturaMin(21);
@@ -93,6 +102,15 @@ class TermostatoTest {
 	}
 	
 	@Test
+	void testSetTemperaturaMaxNoEntra2() {
+		
+		termostato.setTemperaturaMax(9);
+		assertEquals(30, termostato.getTemperaturaMax());
+		assertEquals(19, termostato.getTemperaturaActual());
+		
+	}
+	
+	@Test
 	void testSetTemperaturaActualEntra() {
 		
 		try {
@@ -115,6 +133,14 @@ class TermostatoTest {
 	void testSetTemperaturaActualNoEntra() {
 		
 		termostato.setTemperaturaActual(22);
+		assertEquals(22, termostato.getTemperaturaActual());
+		
+	}
+	
+	@Test
+	void testSetTemperaturaActualNoEntra2() {
+		
+		termostato.setTemperaturaActual(9);
 		assertEquals(22, termostato.getTemperaturaActual());
 		
 	}
@@ -158,6 +184,7 @@ class TermostatoTest {
 		
 		try {
 			
+			termostato.encender();
 			termostato.subir(0);
 			assertEquals(20, termostato.getTemperaturaActual());
 			fail("ERROR. Se debería haber lanzado una excepción.");
@@ -176,6 +203,7 @@ class TermostatoTest {
 		
 		try {
 			
+			termostato.encender();
 			termostato.subir(12);
 			assertEquals(32, termostato.getTemperaturaActual());
 			fail("ERROR. Se debería haber lanzado una excepción.");
@@ -199,8 +227,67 @@ class TermostatoTest {
 	}
 
 	@Test
-	void testBajar() {
-		fail("Not yet implemented");
+	void testBajarNoEncendido() {
+		
+		try {
+			
+			termostato.bajar(5);
+			assertEquals(15, termostato.getTemperaturaActual());
+			fail("ERROR. Se debería haber lanzado una excepción.");
+			
+		}
+		catch(IllegalStateException ise) {
+			
+			// Correcta
+			
+		}
+		
+	}
+	
+	@Test
+	void testBajarGradosNegativos() {
+		
+		try {
+			
+			termostato.encender();
+			termostato.bajar(-5);
+			fail("ERROR. Se debería haber lanzado una excepción.");
+			
+		}
+		catch(IllegalArgumentException iae) {
+			
+			// Correcta
+			
+		}
+		
+	}
+	
+	@Test
+	void testBajarTemperaturaMenorMin() {
+		
+		try {
+			
+			termostato.encender();
+			termostato.bajar(11);
+			assertEquals(9, termostato.getTemperaturaActual());
+			fail("ERROR. Se debería haber lanzado una excepción.");
+			
+		}
+		catch(IllegalStateException ise) {
+			
+			// Correcta
+			
+		}
+		
+	}
+	
+	@Test
+	void testBajarCorrecto() {
+		
+		termostato.encender();
+		termostato.bajar(5);
+		assertEquals(15, termostato.getTemperaturaActual());
+		
 	}
 
 }
