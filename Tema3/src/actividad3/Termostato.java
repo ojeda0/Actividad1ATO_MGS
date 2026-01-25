@@ -44,7 +44,7 @@ public class Termostato {
             this.temperaturaMin = temperaturaMin;
 
             // Ajuste automático si la temperatura actual queda fuera de rango
-            if (temperaturaActual > this.temperaturaMin) {
+            if (temperaturaActual < this.temperaturaMin) {
                 temperaturaActual = this.temperaturaMin;
             }
         }
@@ -108,7 +108,7 @@ public class Termostato {
         if (grados <= 0) {
             throw new IllegalArgumentException("Los grados deben ser > 0.");
         }
-        double nueva = temperaturaActual + grados;
+        double nueva = temperaturaActual - grados;
         if (nueva < temperaturaMin) {
             throw new IllegalStateException("No se puede bajar tanto: se baja del mínimo.");
         }

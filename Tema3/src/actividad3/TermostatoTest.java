@@ -77,9 +77,9 @@ class TermostatoTest {
 	@Test
 	void testSetTemperaturaMinNoEntra() {
 		
-		termostato.setTemperaturaMin(21);
-		assertEquals(21, termostato.getTemperaturaMin());
-		assertEquals(20, termostato.getTemperaturaActual());
+		termostato.setTemperaturaMin(22);
+		assertEquals(22, termostato.getTemperaturaMin());
+		assertEquals(22, termostato.getTemperaturaActual());
 		
 	}
 
@@ -138,10 +138,20 @@ class TermostatoTest {
 	}
 	
 	@Test
-	void testSetTemperaturaActualNoEntra2() {
+	void testSetTemperaturaActualEntra2() {
 		
-		termostato.setTemperaturaActual(9);
-		assertEquals(22, termostato.getTemperaturaActual());
+		try {
+			
+			termostato.setTemperaturaActual(9);
+			
+			fail("ERROR. Se debería haber lanzado una excepción.");
+			
+		}
+		catch(IllegalArgumentException iae) {
+			
+			// Prueba correcta
+			
+		}
 		
 	}
 
@@ -268,8 +278,7 @@ class TermostatoTest {
 		try {
 			
 			termostato.encender();
-			termostato.bajar(11);
-			assertEquals(9, termostato.getTemperaturaActual());
+			termostato.bajar(15);
 			fail("ERROR. Se debería haber lanzado una excepción.");
 			
 		}
@@ -285,8 +294,8 @@ class TermostatoTest {
 	void testBajarCorrecto() {
 		
 		termostato.encender();
-		termostato.bajar(5);
-		assertEquals(15, termostato.getTemperaturaActual());
+		termostato.bajar(3);
+		assertEquals(17, termostato.getTemperaturaActual());
 		
 	}
 
