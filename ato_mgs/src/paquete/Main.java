@@ -18,7 +18,8 @@ public class Main {
 		 
 		 // === BLOQUE B (solo Alumno B) ===
 		 
-		 
+		 System.out.println("Multiplica: " + calc.multiplicar(a, b));
+
 		 
 		 
 	}
